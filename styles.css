@@ -13,11 +13,14 @@
 body {
   margin: 0;
   color: var(--ink);
-  background: var(--paper);
+  background: #121212;
   font-family: Lato, "Noto Sans TC", sans-serif;
   font-size: 11pt;
   line-height: 1.6667;
   overflow: hidden;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
 }
 
 .hidden { display: none !important; }
@@ -26,14 +29,18 @@ button,
 input { font: inherit; }
 
 .cover-screen {
-  height: 100vh;
-  display: grid;
-  grid-template-rows: minmax(0, 61vh) minmax(230px, 39vh);
-  padding: clamp(8px, 1vw, 14px);
+  width: min(100vw, 1024px);
+  height: min(100vh, 768px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(14px, 2vw, 22px);
   background:
     radial-gradient(circle at 50% 0%, rgba(73,170,212,0.18), transparent 42%),
     linear-gradient(180deg, #0f1416, #211d1a 58%, #161311);
   color: #fff;
+  gap: 12px;
 }
 
 .cover-art {
@@ -43,14 +50,22 @@ input { font: inherit; }
   border-radius: 16px;
   box-shadow: 0 28px 80px rgba(0,0,0,0.52);
   background: #111;
+  min-height: 0;
+  flex: 0 0 auto;
+  width: min(100%, 860px);
+  aspect-ratio: 1672 / 941;
+  height: auto;
+  justify-self: center;
+  align-self: center;
 }
 
 .cover-art img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain !important;
   object-position: center;
   display: block;
+  background: #101010;
 }
 
 .cover-art::after {
@@ -63,10 +78,10 @@ input { font: inherit; }
 .cover-plaque {
   position: absolute;
   z-index: 2;
-  left: clamp(20px, 5vw, 72px);
-  top: clamp(24px, 7vw, 70px);
-  width: min(620px, 52vw);
-  padding: clamp(18px, 3vw, 34px);
+  left: clamp(18px, 4vw, 54px);
+  top: clamp(18px, 4vw, 44px);
+  width: min(500px, 47%);
+  padding: clamp(12px, 2vw, 22px);
   text-align: center;
   color: #dceff4;
   background: rgba(14, 32, 38, 0.82);
@@ -83,7 +98,7 @@ input { font: inherit; }
 
 .cover-plaque h1 {
   margin: 0;
-  font-size: clamp(34px, 5vw, 64px);
+  font-size: clamp(28px, 4vw, 52px);
   font-weight: 300;
   line-height: 1.05;
   text-shadow: 0 3px 0 rgba(0,0,0,0.24);
@@ -98,18 +113,22 @@ input { font: inherit; }
 }
 
 .cover-login {
+  flex: 1 1 auto;
+  width: 100%;
   display: grid;
   justify-items: center;
   align-content: center;
-  gap: 12px;
-  padding: 18px 12px 8px;
+  gap: 6px;
+  padding: 8px 12px 0;
   text-align: center;
+  min-height: 0;
+  align-self: stretch;
 }
 
 .cover-login h2 {
   margin: 0;
   color: rgba(255,255,255,0.82);
-  font-size: clamp(22px, 3vw, 31px);
+  font-size: clamp(18px, 2.1vw, 24px);
   font-weight: 300;
   letter-spacing: 0.12em;
 }
@@ -122,14 +141,14 @@ input { font: inherit; }
 
 .cover-login label {
   display: grid;
-  gap: 10px;
+  gap: 6px;
   width: min(420px, 86vw);
-  margin-top: 12px;
+  margin-top: 2px;
   color: rgba(255,255,255,0.78);
 }
 
 .cover-login input {
-  min-height: 54px;
+  min-height: 40px;
   border: 1px solid rgba(201,151,25,0.62);
   border-radius: 999px;
   background: rgba(0,0,0,0.16);
@@ -146,8 +165,8 @@ input { font: inherit; }
 
 .cover-start {
   min-width: 230px;
-  min-height: 56px;
-  margin-top: 8px;
+  min-height: 48px;
+  margin-top: 4px;
   border: 0;
   border-radius: 999px;
   background: #c89300;
@@ -172,7 +191,7 @@ input { font: inherit; }
   min-width: 0;
   height: 100vh;
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr);
   overflow: hidden;
 }
 
@@ -268,7 +287,6 @@ input { font: inherit; }
 #hintBtn:hover,
 .outline-btn:hover,
 .primary-btn,
-.tool.active,
 .chip.selected,
 .hotspot.found {
   background: var(--blue);
@@ -276,13 +294,12 @@ input { font: inherit; }
 }
 
 .progress-strip {
-  padding: 8px clamp(14px, 2.4vw, 28px);
-  background: #212121;
+  display: none;
 }
 
 #progressSteps {
   display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-template-columns: repeat(8, minmax(0, 1fr));
   gap: 8px;
   max-width: 1180px;
   margin: 0 auto;
@@ -313,6 +330,118 @@ input { font: inherit; }
   min-height: 0;
   overflow: hidden;
   padding: clamp(12px, 2vw, 24px);
+  background:
+    radial-gradient(circle at center, rgba(73,170,212,0.12), transparent 52%),
+    #111;
+}
+
+.game-scene {
+  position: relative;
+  max-width: 1024px;
+  aspect-ratio: 4 / 3;
+  height: 100%;
+  max-height: calc(100vh - 100px);
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  background-image: var(--scene-img);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+
+.scene-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.46), rgba(0,0,0,0.12) 50%, rgba(0,0,0,0.34)),
+    radial-gradient(circle at 54% 48%, rgba(0,0,0,0), rgba(0,0,0,0.28));
+}
+
+.scene-hud {
+  position: relative;
+  z-index: 2;
+  min-height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 22px;
+  background: rgba(32,24,18,0.82);
+  border-bottom: 1px solid rgba(201,151,25,0.28);
+  color: #d9a21a;
+}
+
+.scene-hud span {
+  color: rgba(255,255,255,0.72);
+  font-weight: 700;
+}
+
+.scene-panel {
+  position: relative;
+  z-index: 2;
+  width: min(610px, calc(100% - 72px));
+  max-height: calc(100% - 92px);
+  margin: 24px auto 0 64px;
+  overflow: auto;
+  padding: clamp(16px, 2vw, 24px);
+  border: 1px solid rgba(201,151,25,0.42);
+  border-radius: 16px;
+  background: rgba(18,14,11,0.58);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.32);
+  backdrop-filter: blur(3px);
+}
+
+.scene-panel h2,
+.scene-panel h3,
+.scene-panel .case-num,
+.scene-panel .mission,
+.scene-panel .feedback {
+  color: #f2b20c;
+}
+
+.scene-caption {
+  margin: 0 0 12px;
+  color: rgba(255,255,255,0.72);
+}
+
+.scene-panel .news-box {
+  color: rgba(255,255,255,0.9);
+  background: rgba(0,0,0,0.22);
+  border-left-color: #d9a21a;
+}
+
+.scene-panel .primary-btn {
+  background: #c89300;
+  border-color: #c89300;
+  color: #fff;
+  font-weight: 900;
+}
+
+.scene-panel .tool,
+.scene-panel .chip,
+.scene-panel .seq-btn,
+.scene-panel .action-card {
+  border-color: rgba(201,151,25,0.72);
+  background: rgba(0,0,0,0.28);
+  color: #fff;
+}
+
+.scene-panel .bin {
+  background: rgba(0,0,0,0.28);
+  border-color: rgba(201,151,25,0.55);
+}
+
+.scene-panel .bin strong {
+  color: #f2b20c;
+}
+
+.scene-panel .bin span {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border-color: rgba(255,255,255,0.22);
 }
 
 .stage-grid {
@@ -423,6 +552,10 @@ h3 {
   cursor: grab;
 }
 
+.chip.used {
+  display: none;
+}
+
 .chip.dragging {
   opacity: 0.45;
 }
@@ -443,6 +576,19 @@ h3 {
   border-color: #9b2c2c;
   background: rgba(155,44,44,0.1);
   color: #7b2424;
+}
+
+.tool.active {
+  border-color: #2f855a;
+  background: rgba(47,133,90,0.18);
+  color: #1f6b48;
+}
+
+.scene-panel .tool.active {
+  border-color: #68d391;
+  background: rgba(47,133,90,0.36);
+  color: #fff;
+  box-shadow: 0 0 0 2px rgba(104,211,145,0.16);
 }
 
 .bins {
@@ -473,10 +619,12 @@ h3 {
 .bin span {
   display: inline-flex;
   margin: 3px;
-  padding: 4px 8px;
+  padding: 7px 10px;
   background: #fff;
   border: 1px solid var(--line);
   font-size: 0.86rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.16);
 }
 
 .bin .placed-chip {
@@ -579,11 +727,15 @@ input[type="range"] {
 
 @media (max-width: 920px) {
   h2 { font-size: 28pt; }
-  .cover-screen { grid-template-rows: minmax(300px, 52vh) 1fr; }
+  .cover-screen {
+    width: 100vw;
+    height: 100vh;
+  }
+  .cover-art { width: min(94vw, 820px); }
   .cover-plaque {
     left: 18px;
     top: 18px;
-    width: min(540px, 78vw);
+    width: min(430px, 55vw);
   }
   .app-layout { grid-template-columns: 1fr; }
   .side-nav {
@@ -603,6 +755,17 @@ input[type="range"] {
   }
   .score-strip { grid-template-columns: 1fr 1fr; }
   #hintBtn { grid-column: span 2; }
+  .game-scene {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    max-height: calc(100vh - 118px);
+  }
+  .scene-panel {
+    width: calc(100% - 36px);
+    margin: 16px auto 0;
+    max-height: calc(100% - 86px);
+  }
   .stage-grid {
     grid-template-columns: 1fr;
     grid-template-rows: 38% minmax(0, 62%);
@@ -620,8 +783,8 @@ input[type="range"] {
 @media (max-width: 560px) {
   h2 { font-size: 24pt; }
   .cover-screen {
-    grid-template-rows: minmax(260px, 43vh) 1fr;
     padding: 0;
+    gap: 0;
   }
   .cover-art { border-radius: 0; border-width: 0 0 3px; }
   .cover-plaque {
@@ -635,6 +798,16 @@ input[type="range"] {
     font-size: clamp(30px, 10vw, 44px);
   }
   .stage { padding: 14px; }
+  .scene-hud {
+    min-height: 50px;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+  }
+  .scene-panel {
+    width: calc(100% - 20px);
+    margin: 10px auto 0;
+    max-height: calc(100% - 70px);
+  }
   .task-card { padding: 14px; }
   .score-strip { grid-template-columns: 1fr; }
   #hintBtn { grid-column: auto; }

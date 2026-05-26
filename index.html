@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>數位素養偵探社｜沈知夏的藍色檔案</title>
+  <title>數位素養偵探社：藍色檔案夾的祕密</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
   <section class="cover-screen" id="coverScreen">
@@ -16,16 +16,16 @@
       <div class="cover-plaque">
         <p>DIGITAL LITERACY DETECTIVE</p>
         <h1>數位素養偵探社</h1>
-        <span>THE BLUE CASE FILE</span>
+        <span>藍色檔案夾的祕密</span>
       </div>
     </div>
     <div class="cover-login">
-      <h2>互動式閱讀解謎闖關遊戲</h2>
-      <p>遊戲設計 / 海山國小數位素養課程</p>
-      <label>玩家稱謂
-        <input id="coverName" maxlength="12" placeholder="請輸入稱謂，例如：小蘇同學">
+      <h2>序章：從校園實境到數位偵探社</h2>
+      <p>送回偵探任務手冊，輸入文學工具箱密語，開啟藍色檔案夾。</p>
+      <label>小偵探稱謂
+        <input id="coverName" maxlength="16" placeholder="例如：小蘇同學">
       </label>
-      <small>稱謂會出現在遊戲頁與最後個人結案證書中。</small>
+      <small id="coverHint">按下開始後，沈知夏會在序章說明「然而」這個文學密語如何開啟推理。</small>
       <button class="cover-start" type="button" onclick="startFromCover()">開始遊戲</button>
     </div>
   </section>
@@ -34,10 +34,10 @@
     <main class="main">
       <section class="score-strip">
         <label>
-          <span>玩家稱謂</span>
+          <span>小偵探稱謂</span>
           <input id="playerName" value="" maxlength="12" placeholder="尚未登錄">
         </label>
-        <div><span>偵探素養</span><strong id="score">0</strong></div>
+        <div><span>偵探素養</span><strong id="score">100</strong></div>
         <div><span>稱號</span><strong id="rank">見習偵探</strong></div>
         <button id="hintBtn" type="button">提示 -5</button>
       </section>
@@ -50,6 +50,6 @@
     </main>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=10"></script>
 </body>
 </html>

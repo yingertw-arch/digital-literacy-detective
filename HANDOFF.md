@@ -1,81 +1,54 @@
-# 數位素養偵探社｜收工交接
+﻿# 數位素養偵探社｜收工交接
 
 ## 目前狀態
 
-- 專案位置：`C:\Users\HSPS\Desktop\codex\school`
+- 專案位置：`C:\Users\User\OneDrive\文件\Scratch\digital-literacy-detective`
 - GitHub：`https://github.com/yingertw-arch/digital-literacy-detective`
-- 本機預覽網址：`http://127.0.0.1:8787/`
-- 已初始化 Git，並推送到 GitHub private repository。
-- 最新提交：`fa32c62 Build digital literacy detective prototype`
+- 本機預覽網址：`http://127.0.0.1:8787/?v=10`
+- 今日收工版本：首頁與關卡已改成「海山國小」數位素養偵探社新版。
 
-## 已完成
+## 今日完成
 
-- 建立單頁前端原型：
-  - `index.html`
-  - `styles.css`
-  - `script.js`
-- 加入生成圖片素材：
-  - `assets/hero.png`
-  - `assets/case-message.png`
-  - `assets/case-website.png`
-  - `assets/case-photo.png`
-  - `assets/case-algorithm.png`
-  - `assets/case-response.png`
-- 首頁改成 APP 式全螢幕封面。
-- 首頁可輸入玩家稱謂，例如「小蘇同學」。
-- 按「開始遊戲」後才進入闖關。
-- 封面標題牌已移到左側，避免蓋住人物。
-- 遊戲流程改成線性闖關，不能從選單任意跳關。
-- 每關固定在一個平板畫面中呈現，避免整頁右側捲動。
-- 新增第一關前導大圖頁，先看大圖與簡短說明，再正式進入第一關。
-- 第二關改成拖放分類，按「確認分類」才判定；答錯會扣除偵探素養並重設。
-- 目前有：
-  - 序章
-  - 第一關前導大圖
-  - 第一關：點選可疑轉傳線索
-  - 第二關：拖放分類
-  - 第三關：查證流程排序
-  - 第四關：圖片鑑識熱區
-  - 第五關：留言之前，滑桿與回應選擇
-  - 結案證書
+- 首頁改成個人遊玩：欄位為「小偵探稱謂」，按「開始遊戲」即可進入，不再用密語卡關。
+- 首頁大圖調整為平板舞台比例，避免主角臉被標題牌遮住或圖片裁切。
+- 關卡內頁改成單一遊戲畫面感：背景圖鋪底、任務面板覆蓋，不再顯示上方章節列，也不再左右切成兩欄。
+- 背景遮罩與文字面板調整：面板縮小靠左，後方圖片保留可見度。
+- 地點統一改為「海山國小」，並把 Threads／匿名論壇等用語改為較適合國小情境的「班級社群」「校內留言板」。
+- 章節改為新版 7 案：
+  - 序章：從校園實境到數位偵探社
+  - 第一案：深夜群組的蜂鳴警報
+  - 第二案：長得很像真的釣魚迷宮
+  - 第三案：數位偵探的武器箱
+  - 第四、五案：時空錯亂的照片與圖片鑑識桌
+  - 第六案：AI 深偽與社群來源標記
+  - 第七案：留言之前與隱形的校園刀刃
+  - 終章：結案證書
+- 第一案與同類型圈選題改成：先綠色選取，按「送出判斷」後才判定，不會立即用紅色提示錯誤。
+- 偵探素養初始值改為 100，答錯與提示會扣分。
+- 證書分數與稱號門檻調整為 100 起算、滿分約 270：
+  - 250+ 數位素養總探長
+  - 220+ 冷靜判讀者
+  - 185+ 查證偵探
+  - 140+ 線索整理員
+  - 0+ 見習偵探
+- 第二關拖放分類調整：線索拖入分類區後，上方原按鈕消失；分類區以浮動膠囊標籤顯示，點標籤可收回。
 
 ## 下一步建議
 
-- 用平板實機檢查封面與每一關是否完全不需要右側拉桿。
-- 補齊每一關的前導大圖頁，不只第一關。
-- 讓每一關更接近《傾城之戀》範例的多樣性，例如：
-  - 第一關可疑訊息圈選
-  - 第二關拖放分類
-  - 第三關查證流程排序
-  - 第四關圖片熱區鑑識
-  - 第五關情境決策與證書
-- 強化案例內容，參考中小學數位素養教育資源網主題：
-  - 網路識讀
-  - 網路霸凌
-  - 網路隱私
-  - 網路安全
-  - 社交工程
-  - 網路沉迷與數位康健
-- 檢查圖片風格一致性，必要時重新生成主角更穩定的一組圖。
-- 後續 commit / push：
-
-```powershell
-cd C:\Users\HSPS\Desktop\codex\school
-git status
-git add .
-git commit -m "Update digital literacy detective prototype"
-git push
-```
+- 實機平板測試 1024×768 與瀏覽器縮放，確認首頁與每關都不需要整頁捲動。
+- 逐關補強文字長度與任務指令，避免半透明面板過長遮住背景圖。
+- 重新生成或裁切每關背景圖，讓主要人物位置避開任務面板。
+- 若要更新 Obsidian，需先開啟 Obsidian Local REST/MCP 服務，目前 `127.0.0.1:27123` 無法連線。
 
 ## 回家續作指令
 
 ```powershell
-cd C:\Users\HSPS\Desktop\codex\school
-C:\Users\HSPS\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m http.server 8787 --bind 127.0.0.1
+cd C:\Users\User\OneDrive\文件\Scratch\digital-literacy-detective
+C:\Users\User\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe -m http.server 8787 --bind 127.0.0.1
 ```
 
 然後打開：
 
 ```text
-http://127.0.0.1:8787/
+http://127.0.0.1:8787/?v=10
 ```
