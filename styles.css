@@ -1136,6 +1136,7 @@ img { display: block; max-width: 100%; }
   border-radius: 10px;
   overflow: hidden;
   background: #111;
+  cursor: crosshair;
 }
 
 .photo-board img {
@@ -1163,7 +1164,7 @@ img { display: block; max-width: 100%; }
   transition: var(--transition);
 }
 
-/* Blind-test hotspots: invisible until found */
+/* Blind-test hotspots: completely invisible, no hover hints */
 .hotspot.hotspot-hidden {
   width: 56px;
   height: 56px;
@@ -1171,12 +1172,46 @@ img { display: block; max-width: 100%; }
   background: transparent;
   color: transparent;
   animation: none;
-  cursor: crosshair;
+  cursor: inherit;
+  pointer-events: none; /* clicks handled by photo-board instead */
 }
 
-.hotspot.hotspot-hidden:hover {
-  background: rgba(255,255,255,0.08);
-  border-color: rgba(255,255,255,0.15);
+/* Hotspot found — reveal */
+.hotspot.found {
+  pointer-events: none;
+  border: 2px solid var(--gold);
+  background: rgba(212,165,41,0.2);
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.7rem;
+  display: grid;
+  place-items: center;
+  animation: pulse 2s infinite;
+  cursor: default;
+}
+
+/* Click ripple feedback */
+.click-ripple {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  animation: rippleOut 0.6s ease-out forwards;
+}
+.click-hit {
+  border: 2px solid var(--success);
+  background: rgba(52,211,153,0.3);
+}
+.click-miss {
+  border: 2px solid var(--danger);
+  background: rgba(239,68,68,0.3);
+}
+
+@keyframes rippleOut {
+  0% { opacity: 1; transform: translate(-50%, -50%) scale(0.5); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(2); }
 }
 
 .hotspot-guide {

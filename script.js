@@ -57,10 +57,10 @@ const stories = [
     chapter: "第四、五案",
     title: "時空錯亂的照片與圖片鑑識桌",
     paragraphs: [
-      "班級社群突然有人分享一張照片，說是「今天下午一點半海山國小後門校外人士鬧事」。照片裡確實是學校後門，黑衣人、煙霧、翻倒的車——看起來驚心動魄。",
-      "然而，你注意到照片角落有幾個奇怪的細節。右側校刊資料寫著 2022 年 11 月，國片《熱血街頭》曾借用學校後門拍攝。旁邊店家的招牌寫著「歡慶 2022 年開幕慶」。照片是真的——但故事是假的。"
+      "班級社群突然有人分享一張照片，說是「今天下午一點半學校後門校外人士鬧事」。照片裡有煙霧、翻倒的車、一群黑衣人——看起來驚心動魄。",
+      "然而，你把照片攤在鑑識桌上，注意到幾個奇怪的細節：放大鏡下的場記板寫著「RAVENSWOOD・SCENE 17B・TAKE 3・06/14/22」；旁邊的報紙頭條是「動作片拍攝造成交通中斷」，日期 2022 年 6 月；藍色校門招牌寫的根本不是海山國小，而是「RAVENSWOOD HIGH SCHOOL」；那群黑衣人其實是操作攝影機與燈光的劇組人員。照片是真的——但故事是假的。"
     ],
-    dialogue: "沈知夏拿出放大鏡：「有圖不等於有真相。照片可能是真照片，但文字脈絡被移花接木。找出時間戳記、原始來源、裁切痕跡——真相就在細節裡。」",
+    dialogue: "沈知夏拿出放大鏡：「有圖不等於有真相。照片可能是真照片，但文字脈絡被移花接木。找出場記板、原始來源、校名與器材——真相就在細節裡。」",
     closing: "你坐到圖片鑑識桌前，開始逐一標記照片上的關鍵鑑識點。"
   },
   // 第六案 story
@@ -173,15 +173,15 @@ const stages = [
     title: "時空錯亂的照片與圖片鑑識桌",
     img: "assets/case-photo.png",
     caption: "玩法：圖片微觀找碴與多文本時空鎖。「有圖」不等於「有真相」。",
-    news: "班級社群爆料稱：今天下午 13:30，海山國小後門校外人士鬧事，黑衣人砸車鬧事、煙霧瀰漫，校方封鎖消息。可是右側校刊資料寫著：2022 年 11 月 15 日，國片《熱血街頭》曾借用本校後門拍攝動作戲；店家歷史貼文也寫著「歡慶2022年開幕慶」。照片可能是真照片，然而文字脈絡被移花接木。",
-    mission: "任務：在照片上找出 4 個鑑識點，破解時空鎖。正確結論：年份 2022，事件主體是電影拍攝。",
+    news: "班級社群爆料稱：今天下午 13:30，學校後門有校外人士鬧事，黑衣人砸車、煙霧瀰漫、車輛翻覆，校方封鎖消息！但偵探桌上的證物透露端倪：場記板寫著「RAVENSWOOD・SCENE 17B・TAKE 3・DATE 06/14/22」；右側《Bayview Daily Herald》報紙頭條是「ACTION FILM SHOOT DISRUPTS TRAFFIC（動作片拍攝造成交通中斷）」，日期 2022/6/14；藍色招牌寫的是「RAVENSWOOD HIGH SCHOOL」根本不是海山國小；現場那群「黑衣人」其實是穿著劇組制服、操作攝影機與燈光器材的工作人員。照片是真的，但「今天、海山國小、鬧事」這個脈絡是假的。",
+    mission: "任務：在照片上找出 4 個鑑識點，破解時空鎖。正確結論：這是 2022 年 6 月「RAVENSWOOD」電影的拍攝現場，不是今天海山國小的鬧事。",
     hotspots: [
-      { x: 18, y: 26, label: "2022" },
-      { x: 63, y: 25, label: "後門" },
-      { x: 76, y: 58, label: "裁切" },
-      { x: 38, y: 70, label: "電影拍攝" }
+      { x: 58, y: 56, label: "場記板 2022" },
+      { x: 87, y: 44, label: "電影報導" },
+      { x: 30, y: 38, label: "校名不符" },
+      { x: 53, y: 33, label: "劇組人員" }
     ],
-    success: "闢謠成功。這不是今天下午的校外人士鬧事，而是 2022 年電影拍攝現場被舊圖新用。造謠者裁掉劇組道具車與攝影器材，讓真照片說出假故事。"
+    success: "闢謠成功！這不是今天海山國小的校外人士鬧事——四個鑑識點全部指向同一個真相：這是 2022 年 6 月電影《RAVENSWOOD》在另一所學校拍攝的動作戲。場記板的拍攝日期、報紙的電影報導、不符的校名招牌、操作器材的劇組人員，都證明造謠者把一張舊的劇照配上假脈絡，讓真照片說出假故事。記住：有圖不等於有真相。"
   },
   {
     type: "terminal",
@@ -535,14 +535,15 @@ function renderStageContent(index) {
 
   if (s.type === "hotspot") {
     renderFrame(s, `
-      <div class="photo-board">
+      <div class="photo-board" id="photoBoard">
         <img src="${s.img}${IMG_VER}" alt="圖片鑑識桌">
-        ${s.hotspots.map((h, i) => `<button class="hotspot hotspot-hidden" style="left:${h.x}%;top:${h.y}%;" data-i="${i}" type="button" aria-label="鑑識熱區"></button>`).join("")}
+        ${s.hotspots.map((h, i) => `<div class="hotspot hotspot-hidden" style="left:${h.x}%;top:${h.y}%;" data-i="${i}"></div>`).join("")}
       </div>
-      <p class="hotspot-guide">🔍 請仔細觀察照片，對照右側文本中的時間與來源線索，用滑鼠點擊照片中的可疑區域。</p>
+      <p class="hotspot-guide">🔍 請仔細觀察照片，對照案例資料中的線索，點擊照片中你認為可疑的區域。點錯會扣分！</p>
+      <p id="hotspotProgress" class="hotspot-guide" style="color:var(--gold);">已找到 0 / ${s.hotspots.length} 個鑑識點</p>
     `);
     state.hotspots.clear();
-    document.querySelectorAll(".hotspot").forEach(btn => btn.addEventListener("click", () => findHotspot(btn)));
+    document.getElementById("photoBoard").addEventListener("click", (e) => handlePhotoClick(e, s));
     return;
   }
 
@@ -901,21 +902,68 @@ function resetSortStage() {
   });
 }
 
-/* ---------- Hotspot ---------- */
-function findHotspot(btn) {
-  const s = stages[state.stage];
-  const idx = Number(btn.dataset.i);
-  const h = s.hotspots[idx];
-  state.hotspots.add(idx);
-  btn.classList.add("found");
-  btn.textContent = h.label;
-  btn.disabled = true;
-  if (state.hotspots.size === s.hotspots.length) {
-    award(30, requiredSolvedKey());
-    feedback(s.success);
-  } else {
-    feedback(`已標記 ${state.hotspots.size}/${s.hotspots.length} 個鑑識點。`);
+/* ---------- Hotspot (click anywhere on photo) ---------- */
+function handlePhotoClick(e, s) {
+  const board = document.getElementById("photoBoard");
+  if (!board) return;
+  // All hotspots already found — ignore further clicks
+  if (state.hotspots.size === s.hotspots.length) return;
+  const rect = board.getBoundingClientRect();
+  const clickX = ((e.clientX - rect.left) / rect.width) * 100;
+  const clickY = ((e.clientY - rect.top) / rect.height) * 100;
+
+  // Check if click is near any undiscovered hotspot (within radius %)
+  const HIT_RADIUS = 8;
+  let hitIdx = -1;
+  for (let i = 0; i < s.hotspots.length; i++) {
+    if (state.hotspots.has(i)) continue;
+    const h = s.hotspots[i];
+    const dx = clickX - h.x;
+    const dy = clickY - h.y;
+    if (Math.sqrt(dx * dx + dy * dy) <= HIT_RADIUS) {
+      hitIdx = i;
+      break;
+    }
   }
+
+  if (hitIdx >= 0) {
+    // Found a hotspot!
+    const h = s.hotspots[hitIdx];
+    state.hotspots.add(hitIdx);
+    const marker = document.querySelector(`.hotspot[data-i="${hitIdx}"]`);
+    if (marker) {
+      marker.classList.remove("hotspot-hidden");
+      marker.classList.add("found");
+      marker.textContent = h.label;
+    }
+    // Show ripple effect at click position
+    showClickRipple(board, e.clientX - rect.left, e.clientY - rect.top, true);
+
+    const progress = document.getElementById("hotspotProgress");
+    if (state.hotspots.size === s.hotspots.length) {
+      award(30, requiredSolvedKey());
+      feedback(s.success);
+      if (progress) progress.textContent = `全部找到！共 ${s.hotspots.length} 個鑑識點 ✓`;
+    } else {
+      feedback(`找到「${h.label}」！`);
+      if (progress) progress.textContent = `已找到 ${state.hotspots.size} / ${s.hotspots.length} 個鑑識點`;
+    }
+  } else {
+    // Missed — deduct score
+    state.score = Math.max(0, state.score - 3);
+    updateHeader();
+    showClickRipple(board, e.clientX - rect.left, e.clientY - rect.top, false);
+    feedback("這裡沒有線索⋯再仔細看看案例資料的提示吧！（-3 素養值）");
+  }
+}
+
+function showClickRipple(parent, x, y, isHit) {
+  const ripple = document.createElement("div");
+  ripple.className = `click-ripple ${isHit ? "click-hit" : "click-miss"}`;
+  ripple.style.left = x + "px";
+  ripple.style.top = y + "px";
+  parent.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 600);
 }
 
 /* ---------- Balance ---------- */
